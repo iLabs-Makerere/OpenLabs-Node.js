@@ -1,0 +1,30 @@
+{
+  "name": "loginapp",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Simple auhtentication system",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "author": "Lorna Tumuhairwe",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "~1.15.2",
+    "connect-flash": "*",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "mongodb": "^2.2.21",
+    "mongoose": "*",
+    "morgan": "~1.7.0",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "serve-favicon": "~2.3.0"
+  }
+}
