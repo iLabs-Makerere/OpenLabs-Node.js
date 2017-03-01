@@ -36,8 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Express session
 app.use(session({
   secret: 'secret',
-    saveUnitialized: true,
-    resave: true
+    //saveUnitialized: true,
+    //resave: true
 }));
 
 //passort init
