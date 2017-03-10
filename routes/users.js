@@ -71,7 +71,7 @@ passport.use(new LocalStrategy(
                 if (err) throw err;
                 if (isMatch){
                     return done(null, user);
-                    return (user)
+                    //return (user);
                    // res.redirect('/');
                 } else {
                     return done(null, false, {message: 'Invalid password'});

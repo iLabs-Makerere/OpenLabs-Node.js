@@ -2,7 +2,7 @@
 <p>Welcome {{name}}! Please select the lab of your interest to proceed.</p>
 
 <div class="table-responsive">
-	<table class="table table-striped">
+	<table class="table table-striped table-bordered">
 	  <thead>
 	    <tr>
 	      <th>#</th>
@@ -14,7 +14,7 @@
 	  {{# each items }}
 	    <tr>
 	      <td>{{this.no}}</td>
-	      <td><a href="labs/{{this.title}}">{{this.title}}</a></td>
+            <td><a href="lab/title/{{this.title}}">{{this.title}}</a></td>
 	      <td>{{this.category}}</td>
 	    </tr>
 	    {{/each}}

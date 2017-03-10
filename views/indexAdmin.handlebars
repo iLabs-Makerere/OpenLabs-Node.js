@@ -1,31 +1,17 @@
 <h3 class="page-header">Available Experiments</h3>
-<p>Welcome Admin {{name}}! Please select the lab of your interest to proceed.</p><br>
+<p>Welcome Admin {{name}}! Please select the lab of your interest to proceed.</p>
 
-<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#labs">Add Experiment</button>
-<br>
-
-<div class="modal fade" id="labs" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content" id="labs">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+<p><button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#publish">Add Experiment</button></p>
+<br><br>
+<div class="modal fade" id="publish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
         </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
     </div>
-  </div>
+</div>
 
 <div class="table-responsive">
-	<table class="table table-striped">
+	<table class="table table-striped table-bordered">
 	  <thead>
 	    <tr>
 	      <th>#</th>

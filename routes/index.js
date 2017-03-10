@@ -21,7 +21,7 @@ router.get('/', ensureAuthenticated, function(req, res) {
 else if (req.user && req.user.role==='admin'){
             Lab.find().sort('-_id')
                 .then(function (doc) {
-                res.render('indexAdmin', { name: req.user.name, items: doc});
+                res.render('indexAdmin', { name: req.user.name, items: doc, n: 0});
             });
     }
 });
@@ -32,6 +32,6 @@ function ensureAuthenticated(req, res, next) {
     else{
         res.redirect('/users/login')
     }
-        }
+}
 
 module.exports = router;
