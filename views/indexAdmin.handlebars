@@ -1,2 +1,46 @@
-<h2 class="page-header">Dashboard</h2>
-<p>Welcome to your dashboard Admin!</p>
+<h3 class="page-header">Available Experiments</h3>
+<p>Welcome Admin {{name}}! Please select the lab of your interest to proceed.</p><br>
+
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#labs">Add Experiment</button>
+<br>
+
+<div class="modal fade" id="labs" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" id="labs">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>#</th>
+	      <th>Title</th>
+	      <th>Category</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  {{# each items }}
+	    <tr>
+	      <td>{{this.no}}</td>
+	      <td><a href="labs/{{this.title}}">{{this.title}}</a></td>
+	      <td>{{this.category}}</td>
+	    </tr>
+	    {{/each}}
+	  </tbody>
+	</table>
+</div>

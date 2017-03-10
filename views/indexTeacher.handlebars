@@ -1,2 +1,23 @@
-<h2 class="page-header">Dashboard</h2>
-<p>Welcome to your dashboard Teacher!</p>  
+<h3 class="page-header">Available Experiments</h3>
+<p>Welcome Tr. {{name}}! Please select the lab of your interest to proceed.</p>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>#</th>
+	      <th>Title</th>
+	      <th>Category</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  {{# each items }}
+	    <tr>
+	      <td>{{this.no}}</td>
+	      <td><a href="labs/{{this.title}}">{{this.title}}</a></td>
+	      <td>{{this.category}}</td>
+	    </tr>
+	    {{/each}}
+	  </tbody>
+	</table>
+</div>

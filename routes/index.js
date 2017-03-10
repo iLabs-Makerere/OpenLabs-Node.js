@@ -9,18 +9,21 @@ router.get('/', ensureAuthenticated, function(req, res) {
             Lab.find().sort('-_id')
                 .then(function (doc) {
                 res.render('indexStudent', { name: req.user.name, items: doc});
-            //res.send(JSON.stringify(doc));
         });
 
 } else if (req.user && req.user.role==='teacher'){
-        res.render('indexTeacher');
-        console.log(req.user.role);
-    }
+            Lab.find().sort('-_id')
+                    .then(function (doc) {
+                    res.render('indexTeacher', { name: req.user.name, items: doc});
+    }); 
+}
 
 else if (req.user && req.user.role==='admin'){
-    res.render('indexAdmin');
-    console.log(req.user.role);
-}
+            Lab.find().sort('-_id')
+                .then(function (doc) {
+                res.render('indexAdmin', { name: req.user.name, items: doc});
+            });
+    }
 });
 
 function ensureAuthenticated(req, res, next) {

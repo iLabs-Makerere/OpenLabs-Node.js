@@ -1,12 +1,15 @@
-<h4 class="page-header">LOGIN</h4>
-<form method="post" action="/users/login">
-  <div class="form-group">
-    <label>Username</label>
+<h4 class="page-header">Login</h4>
+
+<form method="post" action="/users/login" class="well">
+  <div class="input-group">
+  	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
     <input type="text" class="form-control" name="username" placeholder="Username">
-  </div>
-  <div class="form-group">
-    <label>Password</label>
+  </div><br>
+
+  <div class="input-group">
+  	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
     <input type="password" class="form-control" name="password" placeholder="Password">
-  </div>
+  </div><br>
+
   <button type="submit" class="btn btn-default">Submit</button>
 </form>

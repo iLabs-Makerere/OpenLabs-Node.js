@@ -29,7 +29,6 @@ module.exports.createUser = function (newUser, callback) {
         bcrypt.hash(newUser.password, salt, function (err, hash) {
             newUser.password = hash;
             newUser.save(callback);
-
         });
     });
 }
