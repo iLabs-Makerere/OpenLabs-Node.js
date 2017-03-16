@@ -4,18 +4,17 @@
     <title>Open Laboratory</title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.css"/>
     <link rel="stylesheet" href="/stylesheets/style.css"/>
-    <!--<script type="text/javascript" src="/bootstrap.min.js"/>
-    <script type="text/javascript" src="/jquery.min.js"/>-->
+    
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="header clearfix">
-        <nav>
+        <nav id="main-navbar">
             <ul class="nav nav-pills pull-right">
                 {{#if user}}
                     <li role="presentation"><a href="/">Dashboard</a></li>
                     <li role="presentation"><a href="/users/logout">Logout</a></li>
-                    {{else}}
+                {{else}}
                     <li role="presentation"><a href="/users/login">Login</a></li>
                     <li role="presentation"><a href="/users/register">Register</a></li>
                 {{/if}}
@@ -50,5 +49,10 @@
     </footer>
 
 </div> <!-- /container -->
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="/javascripts/graphing.js"></script>
+    <script type="text/javascript" src="/javascripts/scripts.js"></script>
 </body>
 </html>
