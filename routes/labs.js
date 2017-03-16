@@ -5,7 +5,7 @@ var Lab = require('../models/labs');
 
 router.get('/title/:title', function(req, res){
     console.log(req.query);
-    res.render('labs', {output: req.params.title});
+    res.render('labs1', {output: req.params.title});
 });
 
 router.get('/stuff', function(req, res){
