@@ -13,21 +13,20 @@
 			     </div>
 			     <div class="modal-body">
 			     	<form role="form" method="POST" action="" enctype="multipart/form-data">
-	                    <input type="hidden" name="action" value="add">
-	                    <div class="form-group">
-	                        <label>Title <small>Required</small></label>
-	                        <input type="title" name="title" class="form-control" placeholder="Title" required autofocus>
-	                    </div>
-	                    <div class="form-group">
-	                        <label>Category<small>Required</small></label>
-	                        <input type="author" name="author" class="form-control" placeholder="Author" required>
-	                    </div>
-	                    <div class="form-group">
-	                        <label>Data URL</label>
-	                        <input type="publisher" name="publisher" class="form-control" placeholder="Publisher" required>
-	                    </div>
+			     		<div class="input-group">
+					      <span class="input-group-addon">Title</span>
+					      <input type="text" class="form-control" placeholder="" name="title" required autofocus>
+					    </div><br>
+					    <div class="input-group">
+					      <span class="input-group-addon">Category</span>
+					      <input type="text" class="form-control" placeholder="" name="category" required autofocus>
+					    </div><br>
+					    <div class="input-group">
+					      <span class="input-group-addon">Data URL</span>
+					      <input type="text" class="form-control" placeholder="" name="url" required autofocus>
+					    </div><br>
 	                    <button class="btn btn-sm btn-primary" type="submit">Add</button>
-					s</form>
+					</form>
 			     </div>
 	        </div>
 	    </div>
@@ -46,6 +45,17 @@
 	      <td>{{this.no}}</td>
 	      <td><a href="lab/title/{{this.title}}">{{this.title}}</a></td>
 	      <td>{{this.category}}</td>
+	      <td>
+	      	<form method="POST">
+                <input type="hidden" name="" value="">
+                <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>
+			</form>
+		</td>
+		<td>
+			<form method="POST">
+                <input type="hidden" name="" value="">
+                <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+			</form></td>
 	    </tr>
 	    {{/each}}
 	  </tbody>
