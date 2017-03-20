@@ -1,0 +1,20 @@
+<h4 class="">Update Experiment</h4>
+
+<div class="col-md-8 col-md-offset-2">
+    <form role="form" action="/labs/update" method="POST">
+        <input type="hidden" name="lab" value="{{doc._id}}">
+        <div class="input-group">
+            <span class="input-group-addon">Title</span>
+            <input type="text" class="form-control" name="title" value="{{doc.title}}" required>
+        </div><br>
+        <div class="input-group">
+            <span class="input-group-addon">Category</span>
+            <input type="text" class="form-control" name="category" value="{{doc.category}}" required>
+        </div> <br>
+        <div class="input-group">
+            <span class="input-group-addon">Data URL</span>
+            <input type="text" class="form-control" name="url" value="{{doc.url}}" required>
+        </div><br>
+        <button class="btn btn-sm btn-primary" type="submit">Update</button>
+    </form>
+</div>

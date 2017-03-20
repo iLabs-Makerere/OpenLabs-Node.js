@@ -17,10 +17,10 @@
 	      <td><a href="lab/title/{{this.title}}">{{this.title}}</a></td>
 	      <td>{{this.category}}</td>
 	      <td>
-	      	<form method="POST">
-                <input type="hidden" name="" value="">
-                <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>
-			</form>
+              <form method="POST" action="/labs/details">
+                  <input type="hidden" name="lab" value="{{this._id}}">
+                  <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>
+              </form>
 		</td>
 	    </tr>
 	    {{/each}}

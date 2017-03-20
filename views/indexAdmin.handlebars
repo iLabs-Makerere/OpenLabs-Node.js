@@ -12,18 +12,18 @@
 			        <h4 class="modal-title">Add new Experiment</h4>
 			     </div>
 			     <div class="modal-body">
-			     	<form role="form" method="POST" action="" enctype="multipart/form-data">
+			     	<form role="form" action="/labs/addExperiment" method="POST">
 			     		<div class="input-group">
 					      <span class="input-group-addon">Title</span>
-					      <input type="text" class="form-control" placeholder="" name="title" required autofocus>
+					      <input type="text" class="form-control" name="title" required>
 					    </div><br>
 					    <div class="input-group">
 					      <span class="input-group-addon">Category</span>
-					      <input type="text" class="form-control" placeholder="" name="category" required autofocus>
+					      <input type="text" class="form-control" name="category" required>
 					    </div><br>
 					    <div class="input-group">
 					      <span class="input-group-addon">Data URL</span>
-					      <input type="text" class="form-control" placeholder="" name="url" required autofocus>
+					      <input type="text" class="form-control" name="url" required>
 					    </div><br>
 	                    <button class="btn btn-sm btn-primary" type="submit">Add</button>
 					</form>
@@ -46,14 +46,14 @@
 	      <td><a href="lab/title/{{this.title}}">{{this.title}}</a></td>
 	      <td>{{this.category}}</td>
 	      <td>
-	      	<form method="POST">
-                <input type="hidden" name="" value="">
+            <form method="POST" action="/labs/details">
+                <input type="hidden" name="lab" value="{{this._id}}">
                 <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>
-			</form>
-		</td>
+            </form>
+          </td>
 		<td>
-			<form method="POST">
-                <input type="hidden" name="" value="">
+			<form method="POST" action="/labs/delete" onsubmit="return confirm('Are you sure you want to delete?')">
+                <input type="hidden" name="lab" value="{{this._id}}">
                 <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
 			</form></td>
 	    </tr>
