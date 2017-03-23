@@ -21,7 +21,7 @@ router.post('/addExperiment', function(req, res, next){
         url: req.body.url
     };
 
-    var lab = new Lab(item);
+    var lab = new Lab(item); //instance of the model
     lab.save();
 
     res.redirect('/');
