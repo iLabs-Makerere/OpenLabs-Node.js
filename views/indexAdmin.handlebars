@@ -40,11 +40,11 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  {{# each items }}
+	  {{# each items }} <!--open each block-->
 	    <tr>
-	      <td>{{this.no}}</td>
-	      <td><a href="lab/title/{{this.title}}">{{this.title}}</a></td>
-	      <td>{{this.category}}</td>
+	      <td>{{this.no}}</td><!--Not used anymore, parameter doesnt exist in database, now just creates a first column-->
+	      <td><a href="labs/title/{{this.title}}">{{this.title}}</a></td><!--Display title and when clicked pass the title to create a unique url for each lab-->
+	      <td>{{this.category}}</td><!--display category-->
 	      <td>
             <form method="POST" action="/labs/details">
                 <input type="hidden" name="lab" value="{{this._id}}">
@@ -57,7 +57,7 @@
                 <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
 			</form></td>
 	    </tr>
-	    {{/each}}
+	    {{/each}} <!--close each block-->
 	  </tbody>
 	</table>
 </div>

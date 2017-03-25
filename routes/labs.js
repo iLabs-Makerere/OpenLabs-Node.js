@@ -2,10 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 var Lab = require('../models/labs');
+var Objective = require('../models/objectives');
 
 router.get('/title/:title', function(req, res){
-    console.log(req.query);
-    res.render('labs1', {output: req.params.title});
+    Objective.find().sort('-_id')
+        .then(function (doc) {
+            res.render('labsAdmin', { output: req.params.title, items: doc});
+        });
+    //res.render('labs1', {output: req.params.title}); //get the title passed in the parameter(:title)
+                                                     // to use it in the labs1.handlebars
+
 });
 
 router.get('/stuff', function(req, res){

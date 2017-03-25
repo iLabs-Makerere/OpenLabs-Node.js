@@ -21,8 +21,17 @@
             <div id="wind-speed"></div>
           </div>
           <div id="assessement" class="tab-pane fade">
-            <p>
-            Suspendisse sit amet mi et sapien finibus fermentum vel id massa. Mauris volutpat neque a congue consectetur. Etiam mauris lacus, dictum et varius sed, laoreet non nisl. Morbi libero urna, pellentesque mattis libero vitae, accumsan rhoncus justo. Fusce commodo quam viverra nisl feugiat, sit amet feugiat est placerat. In malesuada accumsan diam. Cras porttitor ac ex non egestas. Donec convallis aliquet lectus, non porta diam ullamcorper at. Phasellus feugiat luctus pretium. Nulla eleifend massa non ipsum sollicitudin, ut congue metus sollicitudin. Nulla rhoncus porttitor eleifend. Curabitur felis eros, suscipit eu magna id, vestibulum fermentum eros. Nullam rhoncus eget neque in finibus. Aenean in enim nisl. Suspendisse pharetra ipsum nec mauris condimentum hendrerit. Nulla nibh nisi, fringilla in sapien vel, consequat pretium ex. </p>
+            {{# each items }} <!--displaying an individual question with the solutions as radio buttons-->
+                <p><strong>{{this.question_ref}}</strong></p>
+            {{# each this.solutions}} <!--the possible solutions are in an array-->
+            <div class="">
+                <p><input name="choice" type="radio" value="{{[0]}}">{{[0]}}</p>
+                <p><input name="choice" type="radio" value="{{[1]}}">{{[1]}}</p>
+                <p><input name="choice" type="radio" value="{{[2]}}">{{[2]}}</p>
+                <p><input name="choice" type="radio" value="{{[3]}}">{{[3]}}</p>
+            </div>
+            {{/each}}
+            {{/each}}
           </div>
         </div>
     </div>
