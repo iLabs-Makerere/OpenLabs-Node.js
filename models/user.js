@@ -20,7 +20,7 @@ var UserSchema = mongoose.Schema({
     name: {
         type: String
     }
-}, {collection: 'user-data'});
+}, {collection: 'user_data'});
 
 var User = module.exports = mongoose.model('User', UserSchema);
 

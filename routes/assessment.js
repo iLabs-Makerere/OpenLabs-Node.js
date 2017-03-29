@@ -7,7 +7,7 @@ var router = express.Router();
 var Lab = require('../models/labs');
 var Objective = require('../models/objectives');
 
-router.get();
+//router.get();
 
 router.post('/addObjective', function(req, res, next){
     var solutions = [];
