@@ -78,8 +78,8 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
-//app.use('/assessment', assessment);
 app.use('/labs', labs);
+//app.use('/assessment', assessment); I dont get why this gives me errors
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
