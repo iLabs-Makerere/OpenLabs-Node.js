@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
 	/*if($('#plotly-div').length){ //refer to graphing.js
         graphingFxn();
   	}*/
+    createTimeline();
     $('#wind-speed').hide();
     $("#stoplabBtn").prop('disabled', true);
 
@@ -18,5 +19,11 @@ jQuery(document).ready(function($) {
     });
 	//console.log(this.location.pathname);
 	$('#main-navbar .nav a[href="' + this.location.pathname + '"]').parent().addClass('active');
+
+    function createTimeline() {
+        var chart = new SmoothieChart();
+        chart.streamTo(document.getElementById("mycanvas"), 500);
+    }
 });
+
 
