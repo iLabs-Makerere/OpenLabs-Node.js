@@ -5,7 +5,7 @@ var labSchema = new Schema({
 	title: String,
 	category: String,
 	url: String
-}, {collection: 'labs-available'});
+}, {collection: 'labs_available'});
 
 var Lab = module.exports = mongoose.model('Lab', labSchema);
 
