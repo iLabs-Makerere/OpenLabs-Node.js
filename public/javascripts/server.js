@@ -17,11 +17,14 @@ wss.on('connection', function(ws) {
         if(action == "Connect"){
             var client = data[0];
             ws_clients[client] = ws;//saves client to ws_clients object
-        }else{
+        } 
+      else{
             var destination = data[0];
             try{
-                ws_clients[destination].send(data[1]);
+                ws_clients[destination].send(data[1]);//sends message to destination
+                console.log(data[1]);
             }catch(e){
+              
             }
             //wss.broadcast(message);
         }

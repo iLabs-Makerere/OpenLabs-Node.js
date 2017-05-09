@@ -2,82 +2,101 @@
 <p>{{id}}</p>
 
 <body>
-    <div class="col-md-3">
-        <!--<ul class="nav nav-tabs nav-centered">-->
-        <ul class="nav nav-sidebar">
-              <li class="active"><a data-toggle="tab" href="#documentation">Documentation</a></li>
-              <li><a data-toggle="tab" href="#experiment">Experiment</a></li>
-              <li><a data-toggle="tab" href="#assessement">Assessement</a></li>
-        </ul>
-    </div>
+<div class="col-md-3">
+    <!--<ul class="nav nav-tabs nav-centered">-->
+    <ul class="nav nav-sidebar">
+        <li class="active"><a data-toggle="tab" href="#documentation">Documentation</a></li>
+        <li><a data-toggle="tab" href="#experiment">Experiment</a></li>
+        <li><a data-toggle="tab" href="#assessement">Assessement</a></li>
+    </ul>
+</div>
 
-    <div class="col-md-9">
-        <div class="tab-content">
-          <div id="documentation" class="tab-pane fade in active">
+<div class="col-md-9">
+    <div class="tab-content">
+        <div id="documentation" class="tab-pane fade in active">
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel justo et lacus vehicula rutrum eget vel nisi. Fusce at mi congue, efficitur sapien sed, aliquam lacus. Maecenas quis molestie eros. Cras lectus nisl, eleifend vel tellus vitae, bibendum porta arcu. Ut sed tempor ligula. Nam consectetur lorem nec neque posuere, sit amet sollicitudin enim suscipit. Vivamus sodales luctus massa, quis consectetur justo imperdiet sit amet. Vivamus orci augue, fringilla interdum pulvinar nec, ullamcorper eget leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus molestie, ligula et pulvinar ullamcorper, nisl felis sodales leo, sit amet accumsan ipsum elit nec turpis.</p>
-          </div>
-          <div id="experiment" class="tab-pane fade">
+        </div>
+        <div id="experiment" class="tab-pane fade">
             <button class="btn btn-success" id="startlabBtn"><span><i class="glyphicon glyphicon-play-circle"></i></span></button>
-              <button class="btn btn-danger" id="stoplabBtn"><span><i class="glyphicon glyphicon-stop"></i></span></button>
+            <button class="btn btn-danger" id="stoplabBtn"><span><i class="glyphicon glyphicon-stop"></i></span></button>
             <!-- Plotly chart will be drawn inside this div -->
-            <div id="wind-speed"></div>
-            <div><canvas id="mycanvas" width="600" height="400"></canvas></div>
-          </div>
-          <div id="assessement" class="tab-pane fade">
-              <p><button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#addQuestion">Add Question</button></p>
-              <br><br>
-              <div class="modal fade" id="addQuestion" role="dialog">
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Add Question</h4>
-                          </div>
-                          <div class="modal-body">
-                              <form role="form" action="/assessment/addObjective" method="POST">
-                                  <div class="input-group">
-                                      <span class="input-group-addon">Question</span>
-                                      <input type="text" class="form-control" name="question" required>
-                                  </div><br>
-                                  <div class="input-group">
-                                      <span class="input-group-addon">Solution 1</span>
-                                      <input type="text" class="form-control" name="solution1" required>
-                                  </div><br>
-                                  <div class="input-group">
-                                      <span class="input-group-addon">Solution 2</span>
-                                      <input type="text" class="form-control" name="solution2" required>
-                                  </div><br>
-                                  <div class="input-group">
-                                      <span class="input-group-addon">Solution 3</span>
-                                      <input type="text" class="form-control" name="solution3" required>
-                                  </div><br>
-                                  <div class="input-group">
-                                      <span class="input-group-addon">Solution 4</span>
-                                      <input type="text" class="form-control" name="solution4" required>
-                                  </div><br>
-                                  <div class="input-group">
-                                      <span class="input-group-addon">Answer</span>
-                                      <input type="text" class="form-control" name="answer" required>
-                                  </div><br>
-                                  <button class="btn btn-sm btn-primary" type="submit">Add</button>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+            <div class="row">
+                <div class = "col-md-8"><canvas id="mycanvas" width="600" height="400"></canvas></div>
+                <div col= "col-md-4">
+                    <p>Functional Generator</p>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="waveform">WaveForm</label>
+                            <select id="waveform" class="form-control">
+                                <option value="SIN">SINE</option>
+                                <option value="SQU">SQUARE</option>
+                            </select>
+                        </div><br>
+                        <p></p>
+                        <div class="form-group">
+                            <label for="frequency">Frequency</label>
+                            <input type="text" class="form-control" id="frequency" placeholder="frequency">
+                        </div><br>
+                        <button id="changewaveform" class="btn btn-sm" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="assessement" class="tab-pane fade">
+            <p><button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#addQuestion">Add Question</button></p>
+            <br><br>
+            <div class="modal fade" id="addQuestion" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Question</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" action="/assessment/addObjective" method="POST">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Question</span>
+                                    <input type="text" class="form-control" name="question" required>
+                                </div><br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Solution 1</span>
+                                    <input type="text" class="form-control" name="solution1" required>
+                                </div><br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Solution 2</span>
+                                    <input type="text" class="form-control" name="solution2" required>
+                                </div><br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Solution 3</span>
+                                    <input type="text" class="form-control" name="solution3" required>
+                                </div><br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Solution 4</span>
+                                    <input type="text" class="form-control" name="solution4" required>
+                                </div><br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Answer</span>
+                                    <input type="text" class="form-control" name="answer" required>
+                                </div><br>
+                                <button class="btn btn-sm btn-primary" type="submit">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {{# each items }} <!--displaying an individual question with the solutions as radio buttons-->
                 <p><strong>{{this.question_ref}}</strong></p>
-            {{# each this.solutions}} <!--the possible solutions are in an array-->
-            <div class="">
-                <p><input name="choice" type="radio" value="{{[0]}}">{{[0]}}</p>
-                <p><input name="choice" type="radio" value="{{[1]}}">{{[1]}}</p>
-                <p><input name="choice" type="radio" value="{{[2]}}">{{[2]}}</p>
-                <p><input name="choice" type="radio" value="{{[3]}}">{{[3]}}</p>
-            </div>
+                {{# each this.solutions}} <!--the possible solutions are in an array-->
+                    <div class="">
+                        <p><input name="choice" type="radio" value="{{[0]}}">{{[0]}}</p>
+                        <p><input name="choice" type="radio" value="{{[1]}}">{{[1]}}</p>
+                        <p><input name="choice" type="radio" value="{{[2]}}">{{[2]}}</p>
+                        <p><input name="choice" type="radio" value="{{[3]}}">{{[3]}}</p>
+                    </div>
+                {{/each}}
             {{/each}}
-            {{/each}}
-          </div>
         </div>
     </div>
+</div>
 </body>
