@@ -8,13 +8,16 @@ import json
 
 prevTime = 0
 interpolation = 'step'
+delay = 2
 
 def on_message(ws, message):
-    global interpolation
+    global interpolation, delay
     message = json.loads(message)
     connection.write(message[0].encode())
     interpolation = message[1]
     print message[0]
+    delay = 100/float(message[0][3:])
+    print delay
     print message[1]
 
 def on_error(ws, error):
@@ -61,11 +64,11 @@ def on_open(ws):
                     if valuePair[0] is None:
                         valuePair[0] = data_val
                         send_data(ws, data_log)
-                    elif valuePair[0] > 500 and data_val < 500:
+                    elif valuePair[0] > 600 and data_val < 500:
                         #if valuePair[0] < 1000 and data_val > 500:
                         valuePair[0] = data_val
                         send_data(ws, data_log)
-                    elif valuePair[0] < 500 and data_val > 500:
+                    elif valuePair[0] < 400 and data_val > 500:
                         valuePair[0] = data_val
                         send_data(ws, data_log)
                     else:
@@ -96,7 +99,7 @@ def on_open(ws):
         data_rw = ["OpenLabsHost", data_log]
         data_js = json.dumps(data_rw)
         ws.send(data_js)
-        time.sleep(0.5)
+        time.sleep(delay)
 
 if __name__ == "__main__":
     connection = serial.Serial('/dev/ttyUSB0', baudrate=115200, timeout = 0.5)
