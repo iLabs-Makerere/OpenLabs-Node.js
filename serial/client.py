@@ -10,6 +10,14 @@ prevTime = 0
 interpolation = 'step'
 delay = 2
 
+def find_between( s, first, last ):
+    try:
+        start = s.index( first ) + len( first )
+        end = s.index( last, start )
+        return s[start:end]
+    except ValueError:
+        return ""
+
 def on_message(ws, message):
     global interpolation, delay
     message = json.loads(message)
@@ -41,26 +49,33 @@ def on_open(ws):
             print (data_log)
             try:
                 if interpolation == 'step':
-                    data_val = int(data_log[1:4])
+                    data_val = int(find_between(data_log, 'A', 'B'))
                     if valuePair[0] is None:
                         valuePair[0] = data_val
+                        print "data value is None: " + str(data_val)
                         send_data(ws, data_log)
                     elif valuePair[0] > 500:
-                        if valuePair[0] == 1000 and data_val > 500:
-                            valuePair[0] = data_val
+                        if valuePair[0] == 1000 and data_val > 500:#the previous value was low
+                            valuePair[0] = data_val + 5  # some dummy value to get it off 0
+                            print "data value is > 500: " + str(data_val)
                             send_data(ws, data_log)
-                        elif abs(valuePair[0] - data_val) <= 20:
+                        elif abs(valuePair[0] - data_val) <= 10:#both prev and current are high, set valuePair to 0
                             valuePair[0] = 0
+                            print "data value is also > 500: " + str(data_val)
                             send_data(ws, data_log)
                     else:
-                        if valuePair[0] == 0 and data_val < 500:
-                            valuePair[0] = data_val
+                        if valuePair[0] == 0 and data_val < 500:#the previous value was high
+                            #valuePair[0] = data_val
+                            valuePair[0] = data_val + 5 #some dummy value to get it off 0
+                            print "data value is < 500: " + str(data_val)
                             send_data(ws, data_log)
-                        elif abs(valuePair[0] - data_val) <= 20:
+                        elif abs(valuePair[0] - data_val) <= 10:#both prev and current are low, set valuePair to 1000
                             valuePair[0] = 1000
+                            print "data value is also < 500: " + str(data_val)
                             send_data(ws, data_log)
+                    print "difference is : " + str(abs(valuePair[0] - data_val))
                 if interpolation == 'bezier':
-                    data_val = int(data_log[1:4])
+                    data_val = int(find_between(data_log, 'A', 'B'))
                     if valuePair[0] is None:
                         valuePair[0] = data_val
                         send_data(ws, data_log)
@@ -73,18 +88,10 @@ def on_open(ws):
                         send_data(ws, data_log)
                     else:
                         pass
-                    #     elif abs(valuePair[0] - data_val) <= 10:
-                    #         valuePair[0] = 0
-                    #         send_data(ws, data_log)
-                    # else:
-                    #     if valuePair[0] == 0 and data_val < 500:
-                    #         valuePair[0] = data_val
-                    #         send_data(ws, data_log)
-                    #     elif abs(valuePair[0] - data_val) <= 20:
-                    #         valuePair[0] = 1000
-                    #         send_data(ws, data_log)
+
             except ValueError:
                 pass
+
     thread.start_new_thread(run, ())
 
     def send_data(ws, data_log):
