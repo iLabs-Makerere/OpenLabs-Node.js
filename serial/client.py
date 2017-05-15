@@ -24,7 +24,7 @@ def on_message(ws, message):
     connection.write(message[0].encode())
     interpolation = message[1]
     print message[0]
-    delay = 100/float(message[0][3:])
+    delay = 200/float(message[0][3:])
     print delay
     print message[1]
 
@@ -38,17 +38,16 @@ def on_open(ws):
     data_rw = ["OpenLabsClient","Connect"]
     data_js = json.dumps(data_rw)
     ws.send(data_js)
-    #while True:
-        # print 'Am in!!'
-        # data_log = connection.readline().decode('ascii')
-        # print data_log
     def run(*args):
         valuePair = [None,None]
+        prev_log = 0
         while True:
             data_log = connection.readline().strip("\r\n")
+            #prev_log = data_log
             print (data_log)
             try:
                 if interpolation == 'step':
+                    #prev_log[0] = data_log
                     data_val = int(find_between(data_log, 'A', 'B'))
                     if valuePair[0] is None:
                         valuePair[0] = data_val
@@ -58,21 +57,25 @@ def on_open(ws):
                         if valuePair[0] == 1000 and data_val > 500:#the previous value was low
                             valuePair[0] = data_val + 5  # some dummy value to get it off 0
                             print "data value is > 500: " + str(data_val)
+                            prev_log = data_log
                             send_data(ws, data_log)
                         elif abs(valuePair[0] - data_val) <= 10:#both prev and current are high, set valuePair to 0
                             valuePair[0] = 0
                             print "data value is also > 500: " + str(data_val)
-                            send_data(ws, data_log)
+                            send_prevdata(ws, prev_log)
+                            #send_data(ws, data_log)
                     else:
                         if valuePair[0] == 0 and data_val < 500:#the previous value was high
                             #valuePair[0] = data_val
                             valuePair[0] = data_val + 5 #some dummy value to get it off 0
                             print "data value is < 500: " + str(data_val)
+                            prev_log = data_log
                             send_data(ws, data_log)
                         elif abs(valuePair[0] - data_val) <= 10:#both prev and current are low, set valuePair to 1000
                             valuePair[0] = 1000
                             print "data value is also < 500: " + str(data_val)
-                            send_data(ws, data_log)
+                            send_prevdata(ws, prev_log)
+                            #send_data(ws, data_log)
                     print "difference is : " + str(abs(valuePair[0] - data_val))
                 if interpolation == 'bezier':
                     data_val = int(find_between(data_log, 'A', 'B'))
@@ -104,6 +107,20 @@ def on_open(ws):
         prevTime = current_time
         data_log += "T" + str(time_delay)
         data_rw = ["OpenLabsHost", data_log]
+        data_js = json.dumps(data_rw)
+        ws.send(data_js)
+        time.sleep(delay)
+
+    def send_prevdata(ws, prev_log):
+        global prevTime
+        current_time = time.time() * 1000
+        if prevTime is 0:
+            time_delay = 0
+        else:
+            time_delay = current_time - prevTime
+        prevTime = current_time
+        prev_log += "T" + str(time_delay)
+        data_rw = ["OpenLabsHost", prev_log]
         data_js = json.dumps(data_rw)
         ws.send(data_js)
         time.sleep(delay)
