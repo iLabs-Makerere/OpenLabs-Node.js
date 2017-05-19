@@ -3,15 +3,18 @@ var router = express.Router();
 
 var Lab = require('../models/labs');
 var Objective = require('../models/objectives');
-var auth = require('index.js');
+//var auth = require('./index.js').isAuth;
 
-router.get('/title/:title', function(req, res){
-    Objective.find().sort('-_id')
-        .then(function (doc) {
-            res.render('labsAdmin', { output: req.params.title, items: doc});
-        });
-    //res.render('labs1', {output: req.params.title}); //get the title passed in the parameter(:title)
-                                                     // to use it in the labs1.handlebars
+router.get('/title/:title', ensureAuthenticated, function(req, res){
+    if (req.user){
+        console.log(req.user);
+        Objective.find().sort('-_id')
+            .then(function (doc) {
+                res.render('labsAdmin', { output: req.params.title, items: doc});
+            });
+        //res.render('labs1', {output: req.params.title}); //get the title passed in the parameter(:title)
+        // to use it in the labs1.handlebars
+    }
 
 });
 
@@ -21,54 +24,70 @@ router.get('/stuff', function(req, res){
     //{ title: 'LOrna', name: 'lynn' }
 });
 
-router.post('/addExperiment', function(req, res, next){
-    var item = {
-        title: req.body.title,
-        category: req.body.category,
-        url: req.body.url
-    };
+router.post('/addExperiment', ensureAuthenticated, function(req, res, next){
+    if (req.user) {
+        var item = {
+            title: req.body.title,
+            category: req.body.category,
+            url: req.body.url
+        };
 
-    var lab = new Lab(item); //instance of the model
-    lab.save();
+        var lab = new Lab(item); //instance of the model
+        lab.save();
 
-    res.redirect('/');
+        res.redirect('/');
+    }
 });
 
-router.post('/delete', function(req, res, next){
-    var id = req.body.lab;
-    Lab.findByIdAndRemove(id).exec();
+router.post('/delete', ensureAuthenticated, function(req, res, next){
+    if (req.user) {
+        var id = req.body.lab;
+        Lab.findByIdAndRemove(id).exec();
 
-    res.redirect('/');
+        res.redirect('/');
+    }
 });
 
 router.post('/details', function(req, res, next) {
+    if (req.user) {
 
-    var id = req.body.lab;
-    //console.log(id);
+        var id = req.body.lab;
+        //console.log(id);
 
-    Lab.findById(id, function (err, doc) {
-        if (err){
-            console.log('No entry found');
-        } else {
-            res.render('editExperiment', { doc: doc});
-        }
-    });
+        Lab.findById(id, function (err, doc) {
+            if (err) {
+                console.log('No entry found');
+            } else {
+                res.render('editExperiment', {doc: doc});
+            }
+        });
+    }
 });
 
-router.post('/update', function(req, res, next) {
+router.post('/update', ensureAuthenticated, function(req, res, next) {
+    if (req.user) {
 
-    var id = req.body.lab;
+        var id = req.body.lab;
 
-    Lab.findById(id, function (err, doc) {
-        if (err){
-            console.log('No entry found');
-        }
-        doc.title = req.body.title;
-        doc.category = req.body.category;
-        doc.url = req.body.url;
-        doc.save();
-    });
-    res.redirect('/');
+        Lab.findById(id, function (err, doc) {
+            if (err) {
+                console.log('No entry found');
+            }
+            doc.title = req.body.title;
+            doc.category = req.body.category;
+            doc.url = req.body.url;
+            doc.save();
+        });
+        res.redirect('/');
+    }
 });
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    else{
+        res.redirect('/users/login')
+    }
+}
 
 module.exports = router;
