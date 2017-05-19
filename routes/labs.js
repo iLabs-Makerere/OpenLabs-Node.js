@@ -3,6 +3,7 @@ var router = express.Router();
 
 var Lab = require('../models/labs');
 var Objective = require('../models/objectives');
+var Sched = require('../models/schedules');
 //var auth = require('./index.js').isAuth;
 
 router.get('/title/:title', ensureAuthenticated, function(req, res){
@@ -78,6 +79,22 @@ router.post('/update', ensureAuthenticated, function(req, res, next) {
             doc.url = req.body.url;
             doc.save();
         });
+        res.redirect('/');
+    }
+});
+
+router.post('/addSchedule', ensureAuthenticated, function(req, res, next){
+    if (req.user) {
+        var sched = {
+            title: req.body.title,
+            user: req.user.name,
+            date: req.body.labdate,
+            time: req.body.labtime
+        };
+
+        var schedule = new Sched(sched); //instance of the model
+        schedule.save();
+
         res.redirect('/');
     }
 });

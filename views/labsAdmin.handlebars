@@ -102,7 +102,8 @@
             <div class="row">
 
                 <div col= "col-md-4">
-                    <form role="form" action="">
+                    <form role="form" action="/labs/addSchedule" method="post">
+                        <input type="text" name="title" value="{{output}}">
                         Choose time and date
                         <input type="date" name="labdate">
                         <input type="time" name="labtime">
