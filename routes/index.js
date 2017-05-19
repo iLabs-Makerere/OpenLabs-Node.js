@@ -15,7 +15,7 @@ router.get('/', ensureAuthenticated, function(req, res) {
             Lab.find().sort('-_id')
                     .then(function (doc) {
                     res.render('indexTeacher', { name: req.user.name, items: doc});
-    }); 
+    });
 }
 
 else if (req.user && req.user.role==='admin'){
@@ -27,6 +27,14 @@ else if (req.user && req.user.role==='admin'){
 });
 
 function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    else{
+        res.redirect('/users/login')
+    }
+}
+
+module.exports.isAuthenticated = function(req, res, next) {
     if (req.isAuthenticated())
         return next();
     else{

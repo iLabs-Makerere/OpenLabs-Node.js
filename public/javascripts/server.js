@@ -21,7 +21,8 @@ wss.on('connection', function(ws) {
       else{
             var destination = data[0];
             try{
-                ws_clients[destination].send(data[1]);//sends message to destination
+              var msg = data[1];
+                ws_clients[destination].send(JSON.stringify(msg));//sends message to destination
                 console.log(data[1]);
             }catch(e){
               

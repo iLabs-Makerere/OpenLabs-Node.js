@@ -3,6 +3,7 @@ var router = express.Router();
 
 var Lab = require('../models/labs');
 var Objective = require('../models/objectives');
+var auth = require('index.js');
 
 router.get('/title/:title', function(req, res){
     Objective.find().sort('-_id')
