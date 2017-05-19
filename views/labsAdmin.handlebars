@@ -8,6 +8,7 @@
         <li class="active"><a data-toggle="tab" href="#documentation">Documentation</a></li>
         <li><a data-toggle="tab" href="#experiment">Experiment</a></li>
         <li><a data-toggle="tab" href="#assessement">Assessement</a></li>
+        <li><a data-toggle="tab" href="#schedule">Schedules</a></li>
     </ul>
 </div>
 
@@ -96,6 +97,19 @@
                     </div>
                 {{/each}}
             {{/each}}
+        </div>
+        <div id="schedule" class="tab-pane fade">
+            <div class="row">
+
+                <div col= "col-md-4">
+                    <form role="form" action="">
+                        Choose time and date
+                        <input type="date" name="labdate">
+                        <input type="time" name="labtime">
+                        <button class="btn btn-sm btn-primary" type="submit">Select</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

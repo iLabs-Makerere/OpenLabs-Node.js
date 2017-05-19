@@ -10,7 +10,7 @@ router.get('/title/:title', ensureAuthenticated, function(req, res){
         console.log(req.user);
         Objective.find().sort('-_id')
             .then(function (doc) {
-                res.render('labsAdmin', { output: req.params.title, items: doc});
+                res.render('labsAdmin', { output: req.params.title, items: doc, user: req.user});
             });
         //res.render('labs1', {output: req.params.title}); //get the title passed in the parameter(:title)
         // to use it in the labs1.handlebars
