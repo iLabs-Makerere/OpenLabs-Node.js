@@ -14,6 +14,11 @@ var scheduleSchema = new Schema({
 
 var Schedule = module.exports = mongoose.model('Schedule', scheduleSchema);
 
+module.exports.getUserSchedule = function (username, callback) {
+    var query = {user: username};
+    Schedule.findOne(query,callback);
+};
+
 /*module.exports.getAllLabs = function ({}, callback) {
  User.find({}, callback);
  }*/

@@ -9,6 +9,12 @@ var Sched = require('../models/schedules');
 router.get('/title/:title', ensureAuthenticated, function(req, res){
     if (req.user){
         console.log(req.user);
+        Sched.getUserSchedule(req.user.name, function (err, schedule) {
+            if (err) throw err;
+            else{
+                console.log(schedule) ;
+            }
+        });
         Objective.find().sort('-_id')
             .then(function (doc) {
                 res.render('labsAdmin', { output: req.params.title, items: doc, user: req.user});
@@ -105,6 +111,10 @@ function ensureAuthenticated(req, res, next) {
     else{
         res.redirect('/users/login')
     }
+}
+
+function returnSchedule(req, res) {
+
 }
 
 module.exports = router;

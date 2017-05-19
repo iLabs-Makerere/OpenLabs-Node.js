@@ -31,20 +31,20 @@ module.exports.createUser = function (newUser, callback) {
             newUser.save(callback);
         });
     });
-}
+};
 
 module.exports.getUserByUsername = function (username, callback) {
     var query = {username: username};
     User.findOne(query,callback);
-}
+};
 
 module.exports.getUserById = function (id, callback) {
     User.findById(id, callback);
-}
+};
 
 module.exports.comparePassword = function (candidatePassword, hashi, callback) {
     bcrypt.compare(candidatePassword, hashi, function (err, isMatch) {
         if(err) throw err;
         callback(null, isMatch);
     });
-}
+};
