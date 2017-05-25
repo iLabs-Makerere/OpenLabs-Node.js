@@ -40,7 +40,7 @@ def on_open(ws):
     ws.send(data_js)
     def run(*args):
         valuePair = [None,None]
-        prev_log = 0
+        prev_log = str(0)
         while True:
             data_log = connection.readline().strip("\r\n")
             #prev_log = data_log
@@ -57,7 +57,7 @@ def on_open(ws):
                         if valuePair[0] == 1000 and data_val > 500:#the previous value was low
                             valuePair[0] = data_val + 5  # some dummy value to get it off 0
                             print "data value is > 500: " + str(data_val)
-                            prev_log = data_log
+                            prev_log = str(data_log)
                             send_data(ws, data_log)
                         elif abs(valuePair[0] - data_val) <= 10:#both prev and current are high, set valuePair to 0
                             valuePair[0] = 0
